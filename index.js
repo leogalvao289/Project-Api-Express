@@ -1,20 +1,44 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import usersRoutes from './routes/users.js';
+// config inicial
+const express = require('express')
+const mongoose = require('mongoose')
+const app = express()
+const Person = require('./models/Person')
 
-const app = express();
-const PORT = 5000;
+// read JSON  / middlewares
 
-app.use(bodyParser.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
+app.use(express.json())
 
-app.use('/users', usersRoutes)
+//ruta API
+const personRoutes = require('./routes/personRoutes')
 
-app.use(bodyParser.json());
+app.use('/person' , personRoutes)
 
-app.get('/' , (req , response) => { response.send('Hello from Homepage.')
+//ruta inicial / endpoint
+app.get('/', (req, res) => {
+  // enseñar req
+
+  res.json({ message: 'hola Express' })
 })
 
-app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`));
+//puerta
+const DB_USER = 'apiexpress'
+const DB_PASSWORD = encodeURIComponent('jrWelyRYXOO8MMfE')
 
+mongoose
+  .connect(
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@api-express-cluster.dvm6n.mongodb.net/apiexpress?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    console.log('connect to MongoDB')
+    app.listen(3000)
+  })
+  .catch(err => console.log(err))
 
- 
+// user: apiexpress // password: jrWelyRYXOO8MMfE
+
+//mongodb+srv://apiexpress:jrWelyRYXOO8MMfE@api-express-cluster.dvm6n.mongodb.net/apiexpress?retryWrites=true&w=majority

@@ -2,15 +2,15 @@
   "name": "project-api-express",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon index.js "
+    "start": "nodemon ./index.js localhost 3000"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Leonardo <leogalvao289@gmail.com>",
+  "license": "API",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.10"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
