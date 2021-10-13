@@ -1,8 +1,10 @@
 // config inicial
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const Person = require('./models/Person')
+
 
 // read JSON  / middlewares
 
@@ -16,7 +18,7 @@ app.use(express.json())
 //ruta API
 const personRoutes = require('./routes/personRoutes')
 
-app.use('/person' , personRoutes)
+app.use('/person', personRoutes)
 
 //ruta inicial / endpoint
 app.get('/', (req, res) => {
@@ -26,8 +28,8 @@ app.get('/', (req, res) => {
 })
 
 //puerta
-const DB_USER = 'apiexpress'
-const DB_PASSWORD = encodeURIComponent('jrWelyRYXOO8MMfE')
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 mongoose
   .connect(
@@ -39,6 +41,5 @@ mongoose
   })
   .catch(err => console.log(err))
 
-// user: apiexpress // password: jrWelyRYXOO8MMfE
+ 
 
-//mongodb+srv://apiexpress:jrWelyRYXOO8MMfE@api-express-cluster.dvm6n.mongodb.net/apiexpress?retryWrites=true&w=majority

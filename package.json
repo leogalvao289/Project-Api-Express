@@ -9,6 +9,7 @@
   "author": "Leonardo <leogalvao289@gmail.com>",
   "license": "API",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.10"
   },
